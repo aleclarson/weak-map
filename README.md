@@ -1,9 +1,10 @@
-# weak-map v1.0.0 [![frozen](http://badges.github.io/stability-badges/dist/frozen.svg)](http://github.com/badges/stability-badges)
+
+# weak-map v1.0.1 [![frozen](http://badges.github.io/stability-badges/dist/frozen.svg)](http://github.com/badges/stability-badges)
 
 A CoffeeScript version of [this `WeakMap` shim](https://github.com/webcomponents/webcomponentsjs/blob/master/src/WeakMap/WeakMap.js) + some wonderful tweaks by yours truly.
 
 ```sh
-npm install --save aleclarson/weak-map#1.0.0
+npm install --save aleclarson/weak-map#1.0.1
 ```
 
 &nbsp;
@@ -13,24 +14,69 @@ usage
 
 ```CoffeeScript
 WeakMap = require "weak-map"
-
-obj = {}
-
 map = WeakMap()
+obj = {}
+```
 
-map.set obj, "hello world"   # "hello world"
+#### Get and set values
 
-map.has obj                  # true
+```CoffeeScript
+map.set obj, "foo", true
+map.get obj, "foo"
+```
 
-map.get obj                  # "hello world"
+-
 
-map.delete obj               # true
+#### Get and set nested values
+
+```CoffeeScript
+map.set obj, "foo.bar.zen", true
+map.get obj, "foo.bar.zen"
+```
+
+-
+
+#### Get and set the whole storage object
+
+```CoffeeScript
+map.get obj
+map.set obj, "any data type works fine"
+```
+
+-
+
+#### Check if a value exists
+
+```CoffeeScript
+map.has obj
+map.has obj, "foo"
+map.has obj, "foo.bar"
+```
+
+-
+
+#### Remove a value from existence
+
+```CoffeeScript
+map.remove obj
+map.remove obj, "foo"
+map.remove obj, "foo.bar"
 ```
 
 &nbsp;
 
 changelog
 ---------
+
+#### 1.0.1
+
+&nbsp;&nbsp;
+**\+**
+Support key arguments for all methods!
+
+&nbsp;&nbsp;
+**\+**
+Support keys with dot-syntax (eg: "foo.bar")!
 
 #### 1.0.0
 
@@ -57,5 +103,17 @@ The `new` keyword is no longer needed when constructing a `WeakMap`.
 &nbsp;&nbsp;
 **\+**
 `WeakMap.name` now equals `"WeakMap"`.
+
+&nbsp;
+
+tests
+-----
+
+All tests are passing! Find out for yourself:
+
+```sh
+npm install -g jasmine-node
+npm test
+```
 
 &nbsp;

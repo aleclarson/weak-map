@@ -1,8 +1,11 @@
 {
   "name": "weak-map",
-  "description": "The WeakMap class from Web Components.",
-  "version": "1.0.0",
-  "main": "js/src/WeakMap.js",
+  "description": "A weak map for the browser and Node.",
+  "version": "1.0.1",
+  "main": "js/src/index.js",
+  "scripts": {
+    "test": "jasmine-node --matchall --verbose js/spec"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-coffee": "^0.13.0",
