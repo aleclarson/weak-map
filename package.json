@@ -3,17 +3,7 @@
   "description": "A weak map for the browser and Node.",
   "version": "1.0.1",
   "main": "js/src/index.js",
-  "scripts": {
-    "test": "jasmine-node --matchall --verbose js/spec"
-  },
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-coffee": "^0.13.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "load-grunt-tasks": "^3.1.0"
-  },
   "dependencies": {
-    "lotus-require": "aleclarson/lotus-require#1.0.0",
-    "named-function": "aleclarson/named-function#1.0.3"
+    "NamedFunction": "aleclarson/NamedFunction#2.0.0"
   }
 }

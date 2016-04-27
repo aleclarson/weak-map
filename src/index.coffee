@@ -1,58 +1,56 @@
 
-require "lotus-require"
-
-NamedFunction = require "named-function"
+NamedFunction = require "NamedFunction"
 
 WeakMap = module.exports = NamedFunction "WeakMap", ->
-  
+
   return new WeakMap unless @ instanceof WeakMap
-  
+
   @name = WeakMap.unique()
-  
+
   @
 
 WeakMap::set = (object, key, newValue) ->
-  
+
   assertObject object
-  
+
   entry = object[@name] ? []
 
   isDefined = entry[0] is object
-  
+
   if arguments.hasOwnProperty 2
 
     data = entry[1]
-    
+
     data = entry[1] = {} if !isDefined or !data?
 
     WeakMap.cake data, key, set: newValue
-  
+
   else
- 
+
     newValue = key
 
     entry[1] = newValue
-  
+
   if !isDefined
 
     entry[0] = object
-  
+
     Object.defineProperty object, @name, value: entry, writable: yes, configurable: yes
-  
+
   newValue
 
 WeakMap::get = (object, key) ->
-  
+
   assertObject object
-  
+
   entry = object[@name]
-  
+
   return if !entry? or entry[0] isnt object
-  
+
   data = entry[1]
-  
+
   return data unless arguments.hasOwnProperty 1
-  
+
   WeakMap.cake data, key, get: yes if data instanceof Object
 
 WeakMap::remove = (object, key) ->
@@ -69,7 +67,7 @@ WeakMap::remove = (object, key) ->
 
     return no unless data instanceof Object
 
-    return WeakMap.cake data, key, remove: yes 
+    return WeakMap.cake data, key, remove: yes
 
   entry[0] = entry[1] = undefined
 
@@ -98,8 +96,10 @@ WeakMap::has = (object, key) ->
 call = (fn) -> fn()
 
 assertObject = (value) ->
-  unless value? and (!value.__proto__? or value instanceof Object)
-    throw TypeError "'object' must inherit from Object"
+  if value
+    return if value.__proto__ is undefined
+    return if value instanceof Object
+  throw TypeError "Expected a kind of Object!"
 
 Object.defineProperty WeakMap, "unique",
 
